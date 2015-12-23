@@ -1,0 +1,694 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Modelo.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="ModeloStoreContainer">
+    <EntitySet Name="Areas" EntityType="Modelo.Store.Areas" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CargosSet" EntityType="Modelo.Store.CargosSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="EmpleadosSet" EntityType="Modelo.Store.EmpleadosSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="departamentoSet" EntityType="Modelo.Store.departamentoSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="SedeSet" EntityType="Modelo.Store.SedeSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="SubareaSet" EntityType="Modelo.Store.SubareaSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="GrupoSet" EntityType="Modelo.Store.GrupoSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="DepartamentoAreaSet" EntityType="Modelo.Store.DepartamentoAreaSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="DepartamentoSedeSet" EntityType="Modelo.Store.DepartamentoSedeSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="AreaSubareas" EntityType="Modelo.Store.AreaSubareas" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="GrupoAreas" EntityType="Modelo.Store.GrupoAreas" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="SedeDepartamentoSede" Association="Modelo.Store.SedeDepartamentoSede">
+      <End Role="Sede" EntitySet="SedeSet" />
+      <End Role="DepartamentoSede" EntitySet="DepartamentoSedeSet" />
+    </AssociationSet>
+    <AssociationSet Name="departamentoDepartamentoSede" Association="Modelo.Store.departamentoDepartamentoSede">
+      <End Role="departamento" EntitySet="departamentoSet" />
+      <End Role="DepartamentoSede" EntitySet="DepartamentoSedeSet" />
+    </AssociationSet>
+    <AssociationSet Name="departamentoDepartamentoArea" Association="Modelo.Store.departamentoDepartamentoArea">
+      <End Role="departamento" EntitySet="departamentoSet" />
+      <End Role="DepartamentoArea" EntitySet="DepartamentoAreaSet" />
+    </AssociationSet>
+    <AssociationSet Name="AreaDepartamentoArea" Association="Modelo.Store.AreaDepartamentoArea">
+      <End Role="Area" EntitySet="Areas" />
+      <End Role="DepartamentoArea" EntitySet="DepartamentoAreaSet" />
+    </AssociationSet>
+    <AssociationSet Name="AreaGrupoArea" Association="Modelo.Store.AreaGrupoArea">
+      <End Role="Area" EntitySet="Areas" />
+      <End Role="GrupoArea" EntitySet="GrupoAreas" />
+    </AssociationSet>
+    <AssociationSet Name="GrupoGrupoArea" Association="Modelo.Store.GrupoGrupoArea">
+      <End Role="Grupo" EntitySet="GrupoSet" />
+      <End Role="GrupoArea" EntitySet="GrupoAreas" />
+    </AssociationSet>
+    <AssociationSet Name="AreaAreaSubarea" Association="Modelo.Store.AreaAreaSubarea">
+      <End Role="Area" EntitySet="Areas" />
+      <End Role="AreaSubarea" EntitySet="AreaSubareas" />
+    </AssociationSet>
+    <AssociationSet Name="SubareaAreaSubarea" Association="Modelo.Store.SubareaAreaSubarea">
+      <End Role="Subarea" EntitySet="SubareaSet" />
+      <End Role="AreaSubarea" EntitySet="AreaSubareas" />
+    </AssociationSet>
+    <AssociationSet Name="GrupoAreaEmpleados" Association="Modelo.Store.GrupoAreaEmpleados">
+      <End Role="GrupoArea" EntitySet="GrupoAreas" />
+      <End Role="Empleados" EntitySet="EmpleadosSet" />
+    </AssociationSet>
+    <AssociationSet Name="GrupoSubarea" Association="Modelo.Store.GrupoSubarea">
+      <End Role="Grupo" EntitySet="GrupoSet" />
+      <End Role="Subarea" EntitySet="SubareaSet" />
+    </AssociationSet>
+    <AssociationSet Name="CargosEmpleados" Association="Modelo.Store.CargosEmpleados">
+      <End Role="Cargos" EntitySet="CargosSet" />
+      <End Role="Empleados" EntitySet="EmpleadosSet" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Areas">
+    <Key>
+      <PropertyRef Name="Cod" />
+    </Key>
+    <Property Name="Cod" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nombre" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CargosSet">
+    <Key>
+      <PropertyRef Name="Cod" />
+    </Key>
+    <Property Name="Cod" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nombre" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="jefe" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="tipo_de_area" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="EmpleadosSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="GrupoAreaIdGrupoArea" Type="int" Nullable="false" />
+    <Property Name="CargosCod" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="departamentoSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SedeSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SubareaSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="GrupoId" Type="int" Nullable="true" />
+  </EntityType>
+  <EntityType Name="GrupoSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DepartamentoAreaSet">
+    <Key>
+      <PropertyRef Name="IdDepArea" />
+    </Key>
+    <Property Name="IdDepArea" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="departamentoId" Type="int" Nullable="false" />
+    <Property Name="AreaCod" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DepartamentoSedeSet">
+    <Key>
+      <PropertyRef Name="IdDepSede" />
+    </Key>
+    <Property Name="IdDepSede" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SedeId" Type="int" Nullable="false" />
+    <Property Name="departamentoId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AreaSubareas">
+    <Key>
+      <PropertyRef Name="IdAreaSubarea" />
+    </Key>
+    <Property Name="IdAreaSubarea" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AreaCod" Type="int" Nullable="false" />
+    <Property Name="SubareaId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="GrupoAreas">
+    <Key>
+      <PropertyRef Name="IdGrupoArea" />
+    </Key>
+    <Property Name="IdGrupoArea" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AreaCod" Type="int" Nullable="false" />
+    <Property Name="GrupoId" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="SedeDepartamentoSede">
+    <End Role="Sede" Type="Modelo.Store.SedeSet" Multiplicity="1" />
+    <End Role="DepartamentoSede" Type="Modelo.Store.DepartamentoSedeSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sede">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="DepartamentoSede">
+        <PropertyRef Name="SedeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="departamentoDepartamentoSede">
+    <End Role="departamento" Type="Modelo.Store.departamentoSet" Multiplicity="1" />
+    <End Role="DepartamentoSede" Type="Modelo.Store.DepartamentoSedeSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="departamento">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="DepartamentoSede">
+        <PropertyRef Name="departamentoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="departamentoDepartamentoArea">
+    <End Role="departamento" Type="Modelo.Store.departamentoSet" Multiplicity="1" />
+    <End Role="DepartamentoArea" Type="Modelo.Store.DepartamentoAreaSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="departamento">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="DepartamentoArea">
+        <PropertyRef Name="departamentoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="AreaDepartamentoArea">
+    <End Role="Area" Type="Modelo.Store.Areas" Multiplicity="1" />
+    <End Role="DepartamentoArea" Type="Modelo.Store.DepartamentoAreaSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Area">
+        <PropertyRef Name="Cod" />
+      </Principal>
+      <Dependent Role="DepartamentoArea">
+        <PropertyRef Name="AreaCod" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="AreaGrupoArea">
+    <End Role="Area" Type="Modelo.Store.Areas" Multiplicity="1" />
+    <End Role="GrupoArea" Type="Modelo.Store.GrupoAreas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Area">
+        <PropertyRef Name="Cod" />
+      </Principal>
+      <Dependent Role="GrupoArea">
+        <PropertyRef Name="AreaCod" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="GrupoGrupoArea">
+    <End Role="Grupo" Type="Modelo.Store.GrupoSet" Multiplicity="1" />
+    <End Role="GrupoArea" Type="Modelo.Store.GrupoAreas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Grupo">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="GrupoArea">
+        <PropertyRef Name="GrupoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="AreaAreaSubarea">
+    <End Role="Area" Type="Modelo.Store.Areas" Multiplicity="1" />
+    <End Role="AreaSubarea" Type="Modelo.Store.AreaSubareas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Area">
+        <PropertyRef Name="Cod" />
+      </Principal>
+      <Dependent Role="AreaSubarea">
+        <PropertyRef Name="AreaCod" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="SubareaAreaSubarea">
+    <End Role="Subarea" Type="Modelo.Store.SubareaSet" Multiplicity="1" />
+    <End Role="AreaSubarea" Type="Modelo.Store.AreaSubareas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Subarea">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AreaSubarea">
+        <PropertyRef Name="SubareaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="GrupoAreaEmpleados">
+    <End Role="GrupoArea" Type="Modelo.Store.GrupoAreas" Multiplicity="1" />
+    <End Role="Empleados" Type="Modelo.Store.EmpleadosSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GrupoArea">
+        <PropertyRef Name="IdGrupoArea" />
+      </Principal>
+      <Dependent Role="Empleados">
+        <PropertyRef Name="GrupoAreaIdGrupoArea" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="GrupoSubarea">
+    <End Role="Grupo" Type="Modelo.Store.GrupoSet" Multiplicity="0..1" />
+    <End Role="Subarea" Type="Modelo.Store.SubareaSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Grupo">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Subarea">
+        <PropertyRef Name="GrupoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CargosEmpleados">
+    <End Role="Cargos" Type="Modelo.Store.CargosSet" Multiplicity="1" />
+    <End Role="Empleados" Type="Modelo.Store.EmpleadosSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cargos">
+        <PropertyRef Name="Cod" />
+      </Principal>
+      <Dependent Role="Empleados">
+        <PropertyRef Name="CargosCod" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="Modelo" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="ModeloContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Areas" EntityType="Modelo.Area" />
+          <EntitySet Name="CargosSet" EntityType="Modelo.Cargos" />
+          <EntitySet Name="EmpleadosSet" EntityType="Modelo.Empleados" />
+          <EntitySet Name="departamentoSet" EntityType="Modelo.departamento" />
+          <EntitySet Name="SedeSet" EntityType="Modelo.Sede" />
+          <EntitySet Name="SubareaSet" EntityType="Modelo.Subarea" />
+          <EntitySet Name="GrupoSet" EntityType="Modelo.Grupo" />
+          <EntitySet Name="DepartamentoAreaSet" EntityType="Modelo.DepartamentoArea" />
+          <EntitySet Name="DepartamentoSedeSet" EntityType="Modelo.DepartamentoSede" />
+          <EntitySet Name="AreaSubareas" EntityType="Modelo.AreaSubarea" />
+          <EntitySet Name="GrupoAreas" EntityType="Modelo.GrupoArea" />
+          <AssociationSet Name="SedeDepartamentoSede" Association="Modelo.SedeDepartamentoSede">
+            <End Role="Sede" EntitySet="SedeSet" />
+            <End Role="DepartamentoSede" EntitySet="DepartamentoSedeSet" />
+          </AssociationSet>
+          <AssociationSet Name="departamentoDepartamentoSede" Association="Modelo.departamentoDepartamentoSede">
+            <End Role="departamento" EntitySet="departamentoSet" />
+            <End Role="DepartamentoSede" EntitySet="DepartamentoSedeSet" />
+          </AssociationSet>
+          <AssociationSet Name="departamentoDepartamentoArea" Association="Modelo.departamentoDepartamentoArea">
+            <End Role="departamento" EntitySet="departamentoSet" />
+            <End Role="DepartamentoArea" EntitySet="DepartamentoAreaSet" />
+          </AssociationSet>
+          <AssociationSet Name="AreaDepartamentoArea" Association="Modelo.AreaDepartamentoArea">
+            <End Role="Area" EntitySet="Areas" />
+            <End Role="DepartamentoArea" EntitySet="DepartamentoAreaSet" />
+          </AssociationSet>
+          <AssociationSet Name="AreaGrupoArea" Association="Modelo.AreaGrupoArea">
+            <End Role="Area" EntitySet="Areas" />
+            <End Role="GrupoArea" EntitySet="GrupoAreas" />
+          </AssociationSet>
+          <AssociationSet Name="GrupoGrupoArea" Association="Modelo.GrupoGrupoArea">
+            <End Role="Grupo" EntitySet="GrupoSet" />
+            <End Role="GrupoArea" EntitySet="GrupoAreas" />
+          </AssociationSet>
+          <AssociationSet Name="AreaAreaSubarea" Association="Modelo.AreaAreaSubarea">
+            <End Role="Area" EntitySet="Areas" />
+            <End Role="AreaSubarea" EntitySet="AreaSubareas" />
+          </AssociationSet>
+          <AssociationSet Name="SubareaAreaSubarea" Association="Modelo.SubareaAreaSubarea">
+            <End Role="Subarea" EntitySet="SubareaSet" />
+            <End Role="AreaSubarea" EntitySet="AreaSubareas" />
+          </AssociationSet>
+          <AssociationSet Name="GrupoAreaEmpleados" Association="Modelo.GrupoAreaEmpleados">
+            <End Role="GrupoArea" EntitySet="GrupoAreas" />
+            <End Role="Empleados" EntitySet="EmpleadosSet" />
+          </AssociationSet>
+          <AssociationSet Name="GrupoSubarea" Association="Modelo.GrupoSubarea">
+            <End Role="Grupo" EntitySet="GrupoSet" />
+            <End Role="Subarea" EntitySet="SubareaSet" />
+          </AssociationSet>
+          <AssociationSet Name="CargosEmpleados" Association="Modelo.CargosEmpleados">
+            <End Role="Cargos" EntitySet="CargosSet" />
+            <End Role="Empleados" EntitySet="EmpleadosSet" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Area">
+          <Key>
+            <PropertyRef Name="Cod" />
+          </Key>
+          <Property Name="Cod" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" Nullable="false" />
+          <NavigationProperty Name="DepartamentoArea" Relationship="Modelo.AreaDepartamentoArea" FromRole="Area" ToRole="DepartamentoArea" />
+          <NavigationProperty Name="GrupoArea" Relationship="Modelo.AreaGrupoArea" FromRole="Area" ToRole="GrupoArea" />
+          <NavigationProperty Name="AreaSubarea" Relationship="Modelo.AreaAreaSubarea" FromRole="Area" ToRole="AreaSubarea" />
+        </EntityType>
+        <EntityType Name="Cargos">
+          <Key>
+            <PropertyRef Name="Cod" />
+          </Key>
+          <Property Name="Cod" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" Nullable="false" />
+          <Property Name="jefe" Type="String" Nullable="false" />
+          <Property Name="tipo_de_area" Type="String" Nullable="false" />
+          <NavigationProperty Name="Empleados" Relationship="Modelo.CargosEmpleados" FromRole="Cargos" ToRole="Empleados" />
+        </EntityType>
+        <EntityType Name="Empleados">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="GrupoArea" Relationship="Modelo.GrupoAreaEmpleados" FromRole="Empleados" ToRole="GrupoArea" />
+          <Property Name="GrupoAreaIdGrupoArea" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Cargos" Relationship="Modelo.CargosEmpleados" FromRole="Empleados" ToRole="Cargos" />
+          <Property Name="CargosCod" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="departamento">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="DepartamentoSede" Relationship="Modelo.departamentoDepartamentoSede" FromRole="departamento" ToRole="DepartamentoSede" />
+          <NavigationProperty Name="DepartamentoArea" Relationship="Modelo.departamentoDepartamentoArea" FromRole="departamento" ToRole="DepartamentoArea" />
+        </EntityType>
+        <EntityType Name="Sede">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="DepartamentoSede" Relationship="Modelo.SedeDepartamentoSede" FromRole="Sede" ToRole="DepartamentoSede" />
+        </EntityType>
+        <EntityType Name="Subarea">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="AreaSubarea" Relationship="Modelo.SubareaAreaSubarea" FromRole="Subarea" ToRole="AreaSubarea" />
+          <NavigationProperty Name="Grupo" Relationship="Modelo.GrupoSubarea" FromRole="Subarea" ToRole="Grupo" />
+          <Property Name="GrupoId" Type="Int32" Nullable="true" />
+        </EntityType>
+        <EntityType Name="Grupo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="GrupoArea" Relationship="Modelo.GrupoGrupoArea" FromRole="Grupo" ToRole="GrupoArea" />
+          <NavigationProperty Name="Subarea" Relationship="Modelo.GrupoSubarea" FromRole="Grupo" ToRole="Subarea" />
+        </EntityType>
+        <EntityType Name="DepartamentoArea">
+          <Key>
+            <PropertyRef Name="IdDepArea" />
+          </Key>
+          <Property Name="IdDepArea" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="departamento" Relationship="Modelo.departamentoDepartamentoArea" FromRole="DepartamentoArea" ToRole="departamento" />
+          <Property Name="departamentoId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Area" Relationship="Modelo.AreaDepartamentoArea" FromRole="DepartamentoArea" ToRole="Area" />
+          <Property Name="AreaCod" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DepartamentoSede">
+          <Key>
+            <PropertyRef Name="IdDepSede" />
+          </Key>
+          <Property Name="IdDepSede" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Sede" Relationship="Modelo.SedeDepartamentoSede" FromRole="DepartamentoSede" ToRole="Sede" />
+          <Property Name="SedeId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="departamento" Relationship="Modelo.departamentoDepartamentoSede" FromRole="DepartamentoSede" ToRole="departamento" />
+          <Property Name="departamentoId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AreaSubarea">
+          <Key>
+            <PropertyRef Name="IdAreaSubarea" />
+          </Key>
+          <Property Name="IdAreaSubarea" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Area" Relationship="Modelo.AreaAreaSubarea" FromRole="AreaSubarea" ToRole="Area" />
+          <Property Name="AreaCod" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Subarea" Relationship="Modelo.SubareaAreaSubarea" FromRole="AreaSubarea" ToRole="Subarea" />
+          <Property Name="SubareaId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GrupoArea">
+          <Key>
+            <PropertyRef Name="IdGrupoArea" />
+          </Key>
+          <Property Name="IdGrupoArea" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Area" Relationship="Modelo.AreaGrupoArea" FromRole="GrupoArea" ToRole="Area" />
+          <Property Name="AreaCod" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Grupo" Relationship="Modelo.GrupoGrupoArea" FromRole="GrupoArea" ToRole="Grupo" />
+          <Property Name="GrupoId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Empleados" Relationship="Modelo.GrupoAreaEmpleados" FromRole="GrupoArea" ToRole="Empleados" />
+        </EntityType>
+        <Association Name="SedeDepartamentoSede">
+          <End Type="Modelo.Sede" Role="Sede" Multiplicity="1" />
+          <End Type="Modelo.DepartamentoSede" Role="DepartamentoSede" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sede">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DepartamentoSede">
+              <PropertyRef Name="SedeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="departamentoDepartamentoSede">
+          <End Type="Modelo.departamento" Role="departamento" Multiplicity="1" />
+          <End Type="Modelo.DepartamentoSede" Role="DepartamentoSede" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="departamento">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DepartamentoSede">
+              <PropertyRef Name="departamentoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="departamentoDepartamentoArea">
+          <End Type="Modelo.departamento" Role="departamento" Multiplicity="1" />
+          <End Type="Modelo.DepartamentoArea" Role="DepartamentoArea" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="departamento">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DepartamentoArea">
+              <PropertyRef Name="departamentoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AreaDepartamentoArea">
+          <End Type="Modelo.Area" Role="Area" Multiplicity="1" />
+          <End Type="Modelo.DepartamentoArea" Role="DepartamentoArea" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Area">
+              <PropertyRef Name="Cod" />
+            </Principal>
+            <Dependent Role="DepartamentoArea">
+              <PropertyRef Name="AreaCod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AreaGrupoArea">
+          <End Type="Modelo.Area" Role="Area" Multiplicity="1" />
+          <End Type="Modelo.GrupoArea" Role="GrupoArea" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Area">
+              <PropertyRef Name="Cod" />
+            </Principal>
+            <Dependent Role="GrupoArea">
+              <PropertyRef Name="AreaCod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="GrupoGrupoArea">
+          <End Type="Modelo.Grupo" Role="Grupo" Multiplicity="1" />
+          <End Type="Modelo.GrupoArea" Role="GrupoArea" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Grupo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GrupoArea">
+              <PropertyRef Name="GrupoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AreaAreaSubarea">
+          <End Type="Modelo.Area" Role="Area" Multiplicity="1" />
+          <End Type="Modelo.AreaSubarea" Role="AreaSubarea" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Area">
+              <PropertyRef Name="Cod" />
+            </Principal>
+            <Dependent Role="AreaSubarea">
+              <PropertyRef Name="AreaCod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SubareaAreaSubarea">
+          <End Type="Modelo.Subarea" Role="Subarea" Multiplicity="1" />
+          <End Type="Modelo.AreaSubarea" Role="AreaSubarea" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subarea">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AreaSubarea">
+              <PropertyRef Name="SubareaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="GrupoAreaEmpleados">
+          <End Type="Modelo.GrupoArea" Role="GrupoArea" Multiplicity="1" />
+          <End Type="Modelo.Empleados" Role="Empleados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GrupoArea">
+              <PropertyRef Name="IdGrupoArea" />
+            </Principal>
+            <Dependent Role="Empleados">
+              <PropertyRef Name="GrupoAreaIdGrupoArea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="GrupoSubarea">
+          <End Type="Modelo.Grupo" Role="Grupo" Multiplicity="0..1" />
+          <End Type="Modelo.Subarea" Role="Subarea" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Grupo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Subarea">
+              <PropertyRef Name="GrupoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CargosEmpleados">
+          <End Type="Modelo.Cargos" Role="Cargos" Multiplicity="1" />
+          <End Type="Modelo.Empleados" Role="Empleados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cargos">
+              <PropertyRef Name="Cod" />
+            </Principal>
+            <Dependent Role="Empleados">
+              <PropertyRef Name="CargosCod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ModeloStoreContainer" CdmEntityContainer="ModeloContainer">
+    <EntitySetMapping Name="Areas">
+      <EntityTypeMapping TypeName="IsTypeOf(Modelo.Area)">
+        <MappingFragment StoreEntitySet="Areas">
+          <ScalarProperty Name="Cod" ColumnName="Cod" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CargosSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Modelo.Cargos)">
+        <MappingFragment StoreEntitySet="CargosSet">
+          <ScalarProperty Name="Cod" ColumnName="Cod" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="jefe" ColumnName="jefe" />
+          <ScalarProperty Name="tipo_de_area" ColumnName="tipo_de_area" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EmpleadosSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Modelo.Empleados)">
+        <MappingFragment StoreEntitySet="EmpleadosSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="GrupoAreaIdGrupoArea" ColumnName="GrupoAreaIdGrupoArea" />
+          <ScalarProperty Name="CargosCod" ColumnName="CargosCod" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="departamentoSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Modelo.departamento)">
+        <MappingFragment StoreEntitySet="departamentoSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SedeSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Modelo.Sede)">
+        <MappingFragment StoreEntitySet="SedeSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SubareaSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Modelo.Subarea)">
+        <MappingFragment StoreEntitySet="SubareaSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="GrupoId" ColumnName="GrupoId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GrupoSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Modelo.Grupo)">
+        <MappingFragment StoreEntitySet="GrupoSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DepartamentoAreaSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Modelo.DepartamentoArea)">
+        <MappingFragment StoreEntitySet="DepartamentoAreaSet">
+          <ScalarProperty Name="IdDepArea" ColumnName="IdDepArea" />
+          <ScalarProperty Name="departamentoId" ColumnName="departamentoId" />
+          <ScalarProperty Name="AreaCod" ColumnName="AreaCod" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DepartamentoSedeSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Modelo.DepartamentoSede)">
+        <MappingFragment StoreEntitySet="DepartamentoSedeSet">
+          <ScalarProperty Name="IdDepSede" ColumnName="IdDepSede" />
+          <ScalarProperty Name="SedeId" ColumnName="SedeId" />
+          <ScalarProperty Name="departamentoId" ColumnName="departamentoId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AreaSubareas">
+      <EntityTypeMapping TypeName="IsTypeOf(Modelo.AreaSubarea)">
+        <MappingFragment StoreEntitySet="AreaSubareas">
+          <ScalarProperty Name="IdAreaSubarea" ColumnName="IdAreaSubarea" />
+          <ScalarProperty Name="AreaCod" ColumnName="AreaCod" />
+          <ScalarProperty Name="SubareaId" ColumnName="SubareaId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GrupoAreas">
+      <EntityTypeMapping TypeName="IsTypeOf(Modelo.GrupoArea)">
+        <MappingFragment StoreEntitySet="GrupoAreas">
+          <ScalarProperty Name="IdGrupoArea" ColumnName="IdGrupoArea" />
+          <ScalarProperty Name="AreaCod" ColumnName="AreaCod" />
+          <ScalarProperty Name="GrupoId" ColumnName="GrupoId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
