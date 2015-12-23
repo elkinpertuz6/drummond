@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 12/23/2015 11:34:20
+-- Date Created: 12/23/2015 11:51:59
 -- Generated from EDMX file: c:\users\tecnoparque\documents\visual studio 2013\Projects\drummond\drummond\Modelo.edmx
 -- --------------------------------------------------
 
@@ -17,11 +17,77 @@ GO
 -- Dropping existing FOREIGN KEY constraints
 -- --------------------------------------------------
 
+IF OBJECT_ID(N'[dbo].[FK_SedeDepartamentoSede]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[DepartamentoSedeSet] DROP CONSTRAINT [FK_SedeDepartamentoSede];
+GO
+IF OBJECT_ID(N'[dbo].[FK_departamentoDepartamentoSede]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[DepartamentoSedeSet] DROP CONSTRAINT [FK_departamentoDepartamentoSede];
+GO
+IF OBJECT_ID(N'[dbo].[FK_departamentoDepartamentoArea]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[DepartamentoAreaSet] DROP CONSTRAINT [FK_departamentoDepartamentoArea];
+GO
+IF OBJECT_ID(N'[dbo].[FK_AreaDepartamentoArea]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[DepartamentoAreaSet] DROP CONSTRAINT [FK_AreaDepartamentoArea];
+GO
+IF OBJECT_ID(N'[dbo].[FK_AreaGrupoArea]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[GrupoAreas] DROP CONSTRAINT [FK_AreaGrupoArea];
+GO
+IF OBJECT_ID(N'[dbo].[FK_GrupoGrupoArea]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[GrupoAreas] DROP CONSTRAINT [FK_GrupoGrupoArea];
+GO
+IF OBJECT_ID(N'[dbo].[FK_AreaAreaSubarea]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[AreaSubareas] DROP CONSTRAINT [FK_AreaAreaSubarea];
+GO
+IF OBJECT_ID(N'[dbo].[FK_SubareaAreaSubarea]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[AreaSubareas] DROP CONSTRAINT [FK_SubareaAreaSubarea];
+GO
+IF OBJECT_ID(N'[dbo].[FK_GrupoAreaEmpleados]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[EmpleadosSet] DROP CONSTRAINT [FK_GrupoAreaEmpleados];
+GO
+IF OBJECT_ID(N'[dbo].[FK_GrupoSubarea]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[SubareaSet] DROP CONSTRAINT [FK_GrupoSubarea];
+GO
+IF OBJECT_ID(N'[dbo].[FK_CargosEmpleados]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[EmpleadosSet] DROP CONSTRAINT [FK_CargosEmpleados];
+GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
 -- --------------------------------------------------
 
+IF OBJECT_ID(N'[dbo].[Areas]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Areas];
+GO
+IF OBJECT_ID(N'[dbo].[CargosSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[CargosSet];
+GO
+IF OBJECT_ID(N'[dbo].[EmpleadosSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[EmpleadosSet];
+GO
+IF OBJECT_ID(N'[dbo].[departamentoSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[departamentoSet];
+GO
+IF OBJECT_ID(N'[dbo].[SedeSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[SedeSet];
+GO
+IF OBJECT_ID(N'[dbo].[SubareaSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[SubareaSet];
+GO
+IF OBJECT_ID(N'[dbo].[GrupoSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[GrupoSet];
+GO
+IF OBJECT_ID(N'[dbo].[DepartamentoAreaSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[DepartamentoAreaSet];
+GO
+IF OBJECT_ID(N'[dbo].[DepartamentoSedeSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[DepartamentoSedeSet];
+GO
+IF OBJECT_ID(N'[dbo].[AreaSubareas]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[AreaSubareas];
+GO
+IF OBJECT_ID(N'[dbo].[GrupoAreas]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[GrupoAreas];
+GO
 
 -- --------------------------------------------------
 -- Creating all tables
