@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "drummond", "drummond\drummond.csproj", "{483C39DD-776C-446E-8BAD-03FC812D744A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DrummondDAL", "drummond\DrummondDAL.csproj", "{483C39DD-776C-446E-8BAD-03FC812D744A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DrummondPL", "DrummondPL\DrummondPL.csproj", "{2EE585DA-7F0C-4181-B176-A7122A397BF0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entities", "Entities\Entities.csproj", "{B98825F0-8B73-45E5-8B49-CA2638702649}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{483C39DD-776C-446E-8BAD-03FC812D744A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{483C39DD-776C-446E-8BAD-03FC812D744A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{483C39DD-776C-446E-8BAD-03FC812D744A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2EE585DA-7F0C-4181-B176-A7122A397BF0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2EE585DA-7F0C-4181-B176-A7122A397BF0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2EE585DA-7F0C-4181-B176-A7122A397BF0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2EE585DA-7F0C-4181-B176-A7122A397BF0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B98825F0-8B73-45E5-8B49-CA2638702649}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B98825F0-8B73-45E5-8B49-CA2638702649}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B98825F0-8B73-45E5-8B49-CA2638702649}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B98825F0-8B73-45E5-8B49-CA2638702649}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
