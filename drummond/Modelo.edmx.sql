@@ -2,8 +2,13 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
+<<<<<<< HEAD
 -- Date Created: 12/23/2015 11:51:59
 -- Generated from EDMX file: c:\users\tecnoparque\documents\visual studio 2013\Projects\drummond\drummond\Modelo.edmx
+=======
+-- Date Created: 12/23/2015 15:11:23
+-- Generated from EDMX file: C:\Users\Franklin\Documents\GitHub\drummond\drummond\Modelo.edmx
+>>>>>>> origin/master
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -104,7 +109,7 @@ GO
 CREATE TABLE [dbo].[CargosSet] (
     [Cod] int IDENTITY(1,1) NOT NULL,
     [nombre] nvarchar(max)  NOT NULL,
-    [jefe] nvarchar(max)  NOT NULL,
+    [jefe] int  NOT NULL,
     [tipo_de_area] nvarchar(max)  NOT NULL
 );
 GO
@@ -113,32 +118,41 @@ GO
 CREATE TABLE [dbo].[EmpleadosSet] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [GrupoAreaIdGrupoArea] int  NOT NULL,
-    [CargosCod] int  NOT NULL
+    [CargosCod] int  NOT NULL,
+    [Nit] int  NOT NULL,
+    [nombres] nvarchar(max)  NOT NULL,
+    [apellidos] nvarchar(max)  NOT NULL,
+    [Lider] bit  NOT NULL,
+    [JefeCod] nvarchar(max)  NOT NULL
 );
 GO
 
 -- Creating table 'departamentoSet'
 CREATE TABLE [dbo].[departamentoSet] (
-    [Id] int IDENTITY(1,1) NOT NULL
+    [Cod] int IDENTITY(1,1) NOT NULL,
+    [nombre] nvarchar(max)  NOT NULL
 );
 GO
 
 -- Creating table 'SedeSet'
 CREATE TABLE [dbo].[SedeSet] (
-    [Id] int IDENTITY(1,1) NOT NULL
+    [Cod] int IDENTITY(1,1) NOT NULL,
+    [nombre] nvarchar(max)  NOT NULL
 );
 GO
 
 -- Creating table 'SubareaSet'
 CREATE TABLE [dbo].[SubareaSet] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [GrupoId] int  NULL
+    [GrupoId] int  NULL,
+    [nombre] nvarchar(max)  NOT NULL
 );
 GO
 
 -- Creating table 'GrupoSet'
 CREATE TABLE [dbo].[GrupoSet] (
-    [Id] int IDENTITY(1,1) NOT NULL
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [nombre] nvarchar(max)  NOT NULL
 );
 GO
 
@@ -196,16 +210,16 @@ ADD CONSTRAINT [PK_EmpleadosSet]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
--- Creating primary key on [Id] in table 'departamentoSet'
+-- Creating primary key on [Cod] in table 'departamentoSet'
 ALTER TABLE [dbo].[departamentoSet]
 ADD CONSTRAINT [PK_departamentoSet]
-    PRIMARY KEY CLUSTERED ([Id] ASC);
+    PRIMARY KEY CLUSTERED ([Cod] ASC);
 GO
 
--- Creating primary key on [Id] in table 'SedeSet'
+-- Creating primary key on [Cod] in table 'SedeSet'
 ALTER TABLE [dbo].[SedeSet]
 ADD CONSTRAINT [PK_SedeSet]
-    PRIMARY KEY CLUSTERED ([Id] ASC);
+    PRIMARY KEY CLUSTERED ([Cod] ASC);
 GO
 
 -- Creating primary key on [Id] in table 'SubareaSet'
@@ -253,7 +267,7 @@ ALTER TABLE [dbo].[DepartamentoSedeSet]
 ADD CONSTRAINT [FK_SedeDepartamentoSede]
     FOREIGN KEY ([SedeId])
     REFERENCES [dbo].[SedeSet]
-        ([Id])
+        ([Cod])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_SedeDepartamentoSede'
@@ -267,7 +281,7 @@ ALTER TABLE [dbo].[DepartamentoSedeSet]
 ADD CONSTRAINT [FK_departamentoDepartamentoSede]
     FOREIGN KEY ([departamentoId])
     REFERENCES [dbo].[departamentoSet]
-        ([Id])
+        ([Cod])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_departamentoDepartamentoSede'
@@ -281,7 +295,7 @@ ALTER TABLE [dbo].[DepartamentoAreaSet]
 ADD CONSTRAINT [FK_departamentoDepartamentoArea]
     FOREIGN KEY ([departamentoId])
     REFERENCES [dbo].[departamentoSet]
-        ([Id])
+        ([Cod])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_departamentoDepartamentoArea'

@@ -21,6 +21,7 @@ namespace drummond
         }
     
         public int Id { get; set; }
+        public string nombre { get; set; }
     
         public virtual ICollection<GrupoArea> GrupoArea { get; set; }
         public virtual ICollection<Subarea> Subarea { get; set; }

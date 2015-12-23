@@ -19,7 +19,8 @@ namespace drummond
             this.DepartamentoSede = new HashSet<DepartamentoSede>();
         }
     
-        public int Id { get; set; }
+        public int Cod { get; set; }
+        public string nombre { get; set; }
     
         public virtual ICollection<DepartamentoSede> DepartamentoSede { get; set; }
     }
