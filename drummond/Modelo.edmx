@@ -75,7 +75,7 @@
     </Key>
     <Property Name="Cod" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="nombre" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="jefe" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="jefe" Type="int" Nullable="false" />
     <Property Name="tipo_de_area" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="EmpleadosSet">
@@ -85,18 +85,25 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="GrupoAreaIdGrupoArea" Type="int" Nullable="false" />
     <Property Name="CargosCod" Type="int" Nullable="false" />
+    <Property Name="Nit" Type="int" Nullable="false" />
+    <Property Name="nombres" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="apellidos" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Lider" Type="bit" Nullable="false" />
+    <Property Name="JefeCod" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="departamentoSet">
     <Key>
-      <PropertyRef Name="Id" />
+      <PropertyRef Name="Cod" />
     </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Cod" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nombre" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="SedeSet">
     <Key>
-      <PropertyRef Name="Id" />
+      <PropertyRef Name="Cod" />
     </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Cod" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nombre" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="SubareaSet">
     <Key>
@@ -104,12 +111,14 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="GrupoId" Type="int" Nullable="true" />
+    <Property Name="nombre" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="GrupoSet">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nombre" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="DepartamentoAreaSet">
     <Key>
@@ -148,7 +157,7 @@
     <End Role="DepartamentoSede" Type="Modelo.Store.DepartamentoSedeSet" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Sede">
-        <PropertyRef Name="Id" />
+        <PropertyRef Name="Cod" />
       </Principal>
       <Dependent Role="DepartamentoSede">
         <PropertyRef Name="SedeId" />
@@ -160,7 +169,7 @@
     <End Role="DepartamentoSede" Type="Modelo.Store.DepartamentoSedeSet" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="departamento">
-        <PropertyRef Name="Id" />
+        <PropertyRef Name="Cod" />
       </Principal>
       <Dependent Role="DepartamentoSede">
         <PropertyRef Name="departamentoId" />
@@ -172,7 +181,7 @@
     <End Role="DepartamentoArea" Type="Modelo.Store.DepartamentoAreaSet" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="departamento">
-        <PropertyRef Name="Id" />
+        <PropertyRef Name="Cod" />
       </Principal>
       <Dependent Role="DepartamentoArea">
         <PropertyRef Name="departamentoId" />
@@ -352,7 +361,7 @@
           </Key>
           <Property Name="Cod" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="nombre" Type="String" Nullable="false" />
-          <Property Name="jefe" Type="String" Nullable="false" />
+          <Property Name="jefe" Type="Int32" Nullable="false" />
           <Property Name="tipo_de_area" Type="String" Nullable="false" />
           <NavigationProperty Name="Empleados" Relationship="Modelo.CargosEmpleados" FromRole="Cargos" ToRole="Empleados" />
         </EntityType>
@@ -365,21 +374,28 @@
           <Property Name="GrupoAreaIdGrupoArea" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Cargos" Relationship="Modelo.CargosEmpleados" FromRole="Empleados" ToRole="Cargos" />
           <Property Name="CargosCod" Type="Int32" Nullable="false" />
+          <Property Name="Nit" Type="Int32" Nullable="false" />
+          <Property Name="nombres" Type="String" Nullable="false" />
+          <Property Name="apellidos" Type="String" Nullable="false" />
+          <Property Name="Lider" Type="Boolean" Nullable="false" />
+          <Property Name="JefeCod" Type="String" Nullable="false" />
         </EntityType>
         <EntityType Name="departamento">
           <Key>
-            <PropertyRef Name="Id" />
+            <PropertyRef Name="Cod" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Cod" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <NavigationProperty Name="DepartamentoSede" Relationship="Modelo.departamentoDepartamentoSede" FromRole="departamento" ToRole="DepartamentoSede" />
           <NavigationProperty Name="DepartamentoArea" Relationship="Modelo.departamentoDepartamentoArea" FromRole="departamento" ToRole="DepartamentoArea" />
+          <Property Name="nombre" Type="String" Nullable="false" />
         </EntityType>
         <EntityType Name="Sede">
           <Key>
-            <PropertyRef Name="Id" />
+            <PropertyRef Name="Cod" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Cod" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <NavigationProperty Name="DepartamentoSede" Relationship="Modelo.SedeDepartamentoSede" FromRole="Sede" ToRole="DepartamentoSede" />
+          <Property Name="nombre" Type="String" Nullable="false" />
         </EntityType>
         <EntityType Name="Subarea">
           <Key>
@@ -389,6 +405,7 @@
           <NavigationProperty Name="AreaSubarea" Relationship="Modelo.SubareaAreaSubarea" FromRole="Subarea" ToRole="AreaSubarea" />
           <NavigationProperty Name="Grupo" Relationship="Modelo.GrupoSubarea" FromRole="Subarea" ToRole="Grupo" />
           <Property Name="GrupoId" Type="Int32" Nullable="true" />
+          <Property Name="nombre" Type="String" Nullable="false" />
         </EntityType>
         <EntityType Name="Grupo">
           <Key>
@@ -397,6 +414,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <NavigationProperty Name="GrupoArea" Relationship="Modelo.GrupoGrupoArea" FromRole="Grupo" ToRole="GrupoArea" />
           <NavigationProperty Name="Subarea" Relationship="Modelo.GrupoSubarea" FromRole="Grupo" ToRole="Subarea" />
+          <Property Name="nombre" Type="String" Nullable="false" />
         </EntityType>
         <EntityType Name="DepartamentoArea">
           <Key>
@@ -444,7 +462,7 @@
           <End Type="Modelo.DepartamentoSede" Role="DepartamentoSede" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Sede">
-              <PropertyRef Name="Id" />
+              <PropertyRef Name="Cod" />
             </Principal>
             <Dependent Role="DepartamentoSede">
               <PropertyRef Name="SedeId" />
@@ -456,7 +474,7 @@
           <End Type="Modelo.DepartamentoSede" Role="DepartamentoSede" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="departamento">
-              <PropertyRef Name="Id" />
+              <PropertyRef Name="Cod" />
             </Principal>
             <Dependent Role="DepartamentoSede">
               <PropertyRef Name="departamentoId" />
@@ -468,7 +486,7 @@
           <End Type="Modelo.DepartamentoArea" Role="DepartamentoArea" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="departamento">
-              <PropertyRef Name="Id" />
+              <PropertyRef Name="Cod" />
             </Principal>
             <Dependent Role="DepartamentoArea">
               <PropertyRef Name="departamentoId" />
@@ -601,20 +619,27 @@
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="GrupoAreaIdGrupoArea" ColumnName="GrupoAreaIdGrupoArea" />
           <ScalarProperty Name="CargosCod" ColumnName="CargosCod" />
+          <ScalarProperty Name="Nit" ColumnName="Nit" />
+          <ScalarProperty Name="nombres" ColumnName="nombres" />
+          <ScalarProperty Name="apellidos" ColumnName="apellidos" />
+          <ScalarProperty Name="Lider" ColumnName="Lider" />
+          <ScalarProperty Name="JefeCod" ColumnName="JefeCod" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="departamentoSet">
       <EntityTypeMapping TypeName="IsTypeOf(Modelo.departamento)">
         <MappingFragment StoreEntitySet="departamentoSet">
-          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Cod" ColumnName="Cod" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="SedeSet">
       <EntityTypeMapping TypeName="IsTypeOf(Modelo.Sede)">
         <MappingFragment StoreEntitySet="SedeSet">
-          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Cod" ColumnName="Cod" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -623,6 +648,7 @@
         <MappingFragment StoreEntitySet="SubareaSet">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="GrupoId" ColumnName="GrupoId" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -630,6 +656,7 @@
       <EntityTypeMapping TypeName="IsTypeOf(Modelo.Grupo)">
         <MappingFragment StoreEntitySet="GrupoSet">
           <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

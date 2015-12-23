@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 12/23/2015 11:34:20
--- Generated from EDMX file: c:\users\tecnoparque\documents\visual studio 2013\Projects\drummond\drummond\Modelo.edmx
+-- Date Created: 12/23/2015 15:11:23
+-- Generated from EDMX file: C:\Users\Franklin\Documents\GitHub\drummond\drummond\Modelo.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -17,11 +17,77 @@ GO
 -- Dropping existing FOREIGN KEY constraints
 -- --------------------------------------------------
 
+IF OBJECT_ID(N'[dbo].[FK_SedeDepartamentoSede]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[DepartamentoSedeSet] DROP CONSTRAINT [FK_SedeDepartamentoSede];
+GO
+IF OBJECT_ID(N'[dbo].[FK_departamentoDepartamentoSede]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[DepartamentoSedeSet] DROP CONSTRAINT [FK_departamentoDepartamentoSede];
+GO
+IF OBJECT_ID(N'[dbo].[FK_departamentoDepartamentoArea]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[DepartamentoAreaSet] DROP CONSTRAINT [FK_departamentoDepartamentoArea];
+GO
+IF OBJECT_ID(N'[dbo].[FK_AreaDepartamentoArea]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[DepartamentoAreaSet] DROP CONSTRAINT [FK_AreaDepartamentoArea];
+GO
+IF OBJECT_ID(N'[dbo].[FK_AreaGrupoArea]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[GrupoAreas] DROP CONSTRAINT [FK_AreaGrupoArea];
+GO
+IF OBJECT_ID(N'[dbo].[FK_GrupoGrupoArea]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[GrupoAreas] DROP CONSTRAINT [FK_GrupoGrupoArea];
+GO
+IF OBJECT_ID(N'[dbo].[FK_AreaAreaSubarea]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[AreaSubareas] DROP CONSTRAINT [FK_AreaAreaSubarea];
+GO
+IF OBJECT_ID(N'[dbo].[FK_SubareaAreaSubarea]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[AreaSubareas] DROP CONSTRAINT [FK_SubareaAreaSubarea];
+GO
+IF OBJECT_ID(N'[dbo].[FK_GrupoAreaEmpleados]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[EmpleadosSet] DROP CONSTRAINT [FK_GrupoAreaEmpleados];
+GO
+IF OBJECT_ID(N'[dbo].[FK_GrupoSubarea]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[SubareaSet] DROP CONSTRAINT [FK_GrupoSubarea];
+GO
+IF OBJECT_ID(N'[dbo].[FK_CargosEmpleados]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[EmpleadosSet] DROP CONSTRAINT [FK_CargosEmpleados];
+GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
 -- --------------------------------------------------
 
+IF OBJECT_ID(N'[dbo].[Areas]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Areas];
+GO
+IF OBJECT_ID(N'[dbo].[CargosSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[CargosSet];
+GO
+IF OBJECT_ID(N'[dbo].[EmpleadosSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[EmpleadosSet];
+GO
+IF OBJECT_ID(N'[dbo].[departamentoSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[departamentoSet];
+GO
+IF OBJECT_ID(N'[dbo].[SedeSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[SedeSet];
+GO
+IF OBJECT_ID(N'[dbo].[SubareaSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[SubareaSet];
+GO
+IF OBJECT_ID(N'[dbo].[GrupoSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[GrupoSet];
+GO
+IF OBJECT_ID(N'[dbo].[DepartamentoAreaSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[DepartamentoAreaSet];
+GO
+IF OBJECT_ID(N'[dbo].[DepartamentoSedeSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[DepartamentoSedeSet];
+GO
+IF OBJECT_ID(N'[dbo].[AreaSubareas]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[AreaSubareas];
+GO
+IF OBJECT_ID(N'[dbo].[GrupoAreas]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[GrupoAreas];
+GO
 
 -- --------------------------------------------------
 -- Creating all tables
@@ -38,7 +104,7 @@ GO
 CREATE TABLE [dbo].[CargosSet] (
     [Cod] int IDENTITY(1,1) NOT NULL,
     [nombre] nvarchar(max)  NOT NULL,
-    [jefe] nvarchar(max)  NOT NULL,
+    [jefe] int  NOT NULL,
     [tipo_de_area] nvarchar(max)  NOT NULL
 );
 GO
@@ -47,32 +113,41 @@ GO
 CREATE TABLE [dbo].[EmpleadosSet] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [GrupoAreaIdGrupoArea] int  NOT NULL,
-    [CargosCod] int  NOT NULL
+    [CargosCod] int  NOT NULL,
+    [Nit] int  NOT NULL,
+    [nombres] nvarchar(max)  NOT NULL,
+    [apellidos] nvarchar(max)  NOT NULL,
+    [Lider] bit  NOT NULL,
+    [JefeCod] nvarchar(max)  NOT NULL
 );
 GO
 
 -- Creating table 'departamentoSet'
 CREATE TABLE [dbo].[departamentoSet] (
-    [Id] int IDENTITY(1,1) NOT NULL
+    [Cod] int IDENTITY(1,1) NOT NULL,
+    [nombre] nvarchar(max)  NOT NULL
 );
 GO
 
 -- Creating table 'SedeSet'
 CREATE TABLE [dbo].[SedeSet] (
-    [Id] int IDENTITY(1,1) NOT NULL
+    [Cod] int IDENTITY(1,1) NOT NULL,
+    [nombre] nvarchar(max)  NOT NULL
 );
 GO
 
 -- Creating table 'SubareaSet'
 CREATE TABLE [dbo].[SubareaSet] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [GrupoId] int  NULL
+    [GrupoId] int  NULL,
+    [nombre] nvarchar(max)  NOT NULL
 );
 GO
 
 -- Creating table 'GrupoSet'
 CREATE TABLE [dbo].[GrupoSet] (
-    [Id] int IDENTITY(1,1) NOT NULL
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [nombre] nvarchar(max)  NOT NULL
 );
 GO
 
@@ -130,16 +205,16 @@ ADD CONSTRAINT [PK_EmpleadosSet]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
--- Creating primary key on [Id] in table 'departamentoSet'
+-- Creating primary key on [Cod] in table 'departamentoSet'
 ALTER TABLE [dbo].[departamentoSet]
 ADD CONSTRAINT [PK_departamentoSet]
-    PRIMARY KEY CLUSTERED ([Id] ASC);
+    PRIMARY KEY CLUSTERED ([Cod] ASC);
 GO
 
--- Creating primary key on [Id] in table 'SedeSet'
+-- Creating primary key on [Cod] in table 'SedeSet'
 ALTER TABLE [dbo].[SedeSet]
 ADD CONSTRAINT [PK_SedeSet]
-    PRIMARY KEY CLUSTERED ([Id] ASC);
+    PRIMARY KEY CLUSTERED ([Cod] ASC);
 GO
 
 -- Creating primary key on [Id] in table 'SubareaSet'
@@ -187,7 +262,7 @@ ALTER TABLE [dbo].[DepartamentoSedeSet]
 ADD CONSTRAINT [FK_SedeDepartamentoSede]
     FOREIGN KEY ([SedeId])
     REFERENCES [dbo].[SedeSet]
-        ([Id])
+        ([Cod])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_SedeDepartamentoSede'
@@ -201,7 +276,7 @@ ALTER TABLE [dbo].[DepartamentoSedeSet]
 ADD CONSTRAINT [FK_departamentoDepartamentoSede]
     FOREIGN KEY ([departamentoId])
     REFERENCES [dbo].[departamentoSet]
-        ([Id])
+        ([Cod])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_departamentoDepartamentoSede'
@@ -215,7 +290,7 @@ ALTER TABLE [dbo].[DepartamentoAreaSet]
 ADD CONSTRAINT [FK_departamentoDepartamentoArea]
     FOREIGN KEY ([departamentoId])
     REFERENCES [dbo].[departamentoSet]
-        ([Id])
+        ([Cod])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_departamentoDepartamentoArea'

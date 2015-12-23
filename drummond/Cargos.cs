@@ -21,7 +21,7 @@ namespace drummond
     
         public int Cod { get; set; }
         public string nombre { get; set; }
-        public string jefe { get; set; }
+        public int jefe { get; set; }
         public string tipo_de_area { get; set; }
     
         public virtual ICollection<Empleados> Empleados { get; set; }

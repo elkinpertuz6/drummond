@@ -21,6 +21,7 @@ namespace drummond
     
         public int Id { get; set; }
         public Nullable<int> GrupoId { get; set; }
+        public string nombre { get; set; }
     
         public virtual ICollection<AreaSubarea> AreaSubarea { get; set; }
         public virtual Grupo Grupo { get; set; }
